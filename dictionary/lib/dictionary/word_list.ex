@@ -1,13 +1,23 @@
 defmodule Dictionary.WordList do
-  def start() do
-    word_list()
+  @doc """
+  Initializes an agent with the complete word_list as its state
+  """
+  def start_link() do
+    Agent.start_link(&word_list/0)
   end
 
-  def random_word(word_list) do
-    word_list
-    |> Enum.random()
+  @doc """
+  Accepts an Agent's PID and returns a random word from the word_list.
+  The Agent's state contains the word_list.
+  """
+  def random_word(agent) do
+    Agent.get(agent, &Enum.random/1)
   end
 
+  @doc """
+  Creates an Elixir List of words contained in a text file under the
+  assets directory.
+  """
   def word_list() do
     "../../assets/words.txt"
     |> Path.expand(__DIR__)
