@@ -18,13 +18,19 @@ defmodule Hangman.Game do
 
   def make_move(%{game_state: state} = game, _guess)
       when state in [:won, :lost] do
-    {game, tally(game)}
+    game
+    |> return_with_tally()
   end
 
   def make_move(game, guess) do
     case guess =~ ~r(^[a-z]$) do
-      true -> accept_move(game, guess, MapSet.member?(game.used, guess))
-      _ -> "Your guess can only be a single lowercase letter"
+      true ->
+        game
+        |> accept_move(guess, MapSet.member?(game.used, guess))
+        |> return_with_tally()
+
+      _ ->
+        "Your guess can only be a single lowercase letter"
     end
   end
 
@@ -76,4 +82,8 @@ defmodule Hangman.Game do
 
   defp maybe_won?(true), do: :won
   defp maybe_won?(_), do: :good_guess
+
+  defp return_with_tally(game) do
+    {game, tally(game)}
+  end
 end
