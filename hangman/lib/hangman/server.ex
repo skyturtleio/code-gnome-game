@@ -7,6 +7,7 @@ defmodule Hangman.Server do
   end
 
   def init(_) do
+    IO.puts("A new game is being created")
     {:ok, Game.new_game()}
   end
 
