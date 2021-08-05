@@ -8,6 +8,12 @@
   Turns left: <%= @tally.turns_left %>
 </p>
 
-<form>
+<p>
+  Game state: <%= @tally.game_state %>
+</p>
 
-</form>
+
+<%= form_for(@conn, Routes.hangman_path(@conn, :make_move), [as: :make_move, method: :put], fn f -> %>
+  <%= text_input(f, :guess) %>
+  <%= submit("Make next move") %>
+<% end) %>
