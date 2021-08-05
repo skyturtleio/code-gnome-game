@@ -1,5 +1,7 @@
 <h1>Game Field</h1>
 
+<%= game_state(@tally.game_state) %>
+
 <p>
   Word so far: <%= words_so_far(@tally) %>
 </p>
