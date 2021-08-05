@@ -1,0 +1,13 @@
+<h1>Game Field</h1>
+
+<p>
+  Word so far: <%= words_so_far(@tally) %>
+</p>
+
+<p>
+  Turns left: <%= @tally.turns_left %>
+</p>
+
+<form>
+
+</form>
