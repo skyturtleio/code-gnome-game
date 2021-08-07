@@ -3,6 +3,14 @@ defmodule GallowsWeb.HangmanView do
 
   import GallowsWeb.Views.Helpers.GameStateHelper
 
+  def turn(left, target) when target >= left do
+    "opacity: 1"
+  end
+
+  def turn(_left, _target) do
+    "opacity: 0.1"
+  end
+
   def game_over?(%{game_state: game_state}) do
     game_state in [:won, :lost]
   end
